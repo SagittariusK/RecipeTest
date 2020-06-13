@@ -29,7 +29,7 @@ public class ConnectRCP {
 	private String grid_Irdnt = "Grid_20150827000000000227_1";
 	private String grid_Crse = "Grid_20150827000000000228_1";
 	
-	private String grid_Crse7 = "Grid_20150827000000000228_1";
+	private String grid_Crse8 = "Grid_20150827000000000228_1";
 	
 	@SuppressWarnings("unchecked")
 	public HashMap<String, Object> getInfo(int start_index, int end_index, HashMap<String, Object> paramHashMap) {
