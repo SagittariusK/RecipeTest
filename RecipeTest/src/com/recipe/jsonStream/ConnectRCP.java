@@ -35,7 +35,7 @@ public class ConnectRCP {
 	public HashMap<String, Object> getInfo(int start_index, int end_index, HashMap<String, Object> paramHashMap) {
 		HashMap<String, Object> returnHashMap = new HashMap<String, Object>();
 		
-		// API URL 호출 및 JSON결과 HashMap 리턴
+		// API URL �샇異� 諛� JSON寃곌낵 HashMap 由ы꽩
 		try {
 			returnHashMap = getRecipejsonStream(grid_Info, start_index, end_index, paramHashMap);
 		} catch (Exception e) {
@@ -48,11 +48,11 @@ public class ConnectRCP {
 		String code = objUtils.toStr(objUtils.toHashMap(returnHashMap, "recipeResultHashMap").get("code"));
 		String message = objUtils.toStr(objUtils.toHashMap(returnHashMap, "recipeResultHashMap").get("message"));
 		
-		if("INFO-000".equals(code) && "정상 처리되었습니다.".equals(message)) {
-			// API URL 호출 결과 리스트 리턴(HashMap)
+		if("INFO-000".equals(code) && "�젙�긽 泥섎━�릺�뿀�뒿�땲�떎.".equals(message)) {
+			// API URL �샇異� 寃곌낵 由ъ뒪�듃 由ы꽩(HashMap)
 			List<HashMap<String, Object>> recipeResultList = getRecipeList(objUtils.toHashMap(returnHashMap, "jsonHashMap"), grid_Info);
 			try {
-				// HashMap 형식의 List -> VO 형식의 List 변환
+				// HashMap �삎�떇�쓽 List -> VO �삎�떇�쓽 List 蹂��솚
 				infoList = (List<RCP_InfoVO>) this.toVoList(recipeResultList, "Info");
 			} catch (Exception e) {
 				logger.error("ListMap to ListVO Error:");
@@ -68,7 +68,7 @@ public class ConnectRCP {
 	public HashMap<String, Object> getIrdnt(int start_index, int end_index, HashMap<String, Object> paramHashMap) {
 		HashMap<String, Object> returnHashMap = new HashMap<String, Object>();
 		
-		// API URL 호출 및 JSON결과 HashMap 리턴
+		// API URL �샇異� 諛� JSON寃곌낵 HashMap 由ы꽩
 		try {
 			returnHashMap = getRecipejsonStream(grid_Irdnt, start_index, end_index, paramHashMap);
 		} catch (Exception e) {
@@ -81,11 +81,11 @@ public class ConnectRCP {
 		String code = objUtils.toStr(objUtils.toHashMap(returnHashMap, "recipeResultHashMap").get("code"));
 		String message = objUtils.toStr(objUtils.toHashMap(returnHashMap, "recipeResultHashMap").get("message"));
 		
-		if("INFO-000".equals(code) && "정상 처리되었습니다.".equals(message)) {
-			// API URL 호출 결과 리스트 리턴(HashMap)
+		if("INFO-000".equals(code) && "�젙�긽 泥섎━�릺�뿀�뒿�땲�떎.".equals(message)) {
+			// API URL �샇異� 寃곌낵 由ъ뒪�듃 由ы꽩(HashMap)
 			List<HashMap<String, Object>> recipeResultList = getRecipeList(objUtils.toHashMap(returnHashMap, "jsonHashMap"), grid_Irdnt);
 			try {
-				// HashMap 형식의 List -> VO 형식의 List 변환
+				// HashMap �삎�떇�쓽 List -> VO �삎�떇�쓽 List 蹂��솚
 				irdntList = (List<RCP_IrdntVO>) this.toVoList(recipeResultList, "Irdnt");
 			} catch (Exception e) {
 				logger.error("ListMap to ListVO Error:");
@@ -101,7 +101,7 @@ public class ConnectRCP {
 	public HashMap<String, Object> getCrse(int start_index, int end_index, HashMap<String, Object> paramHashMap) {
 		HashMap<String, Object> returnHashMap = new HashMap<String, Object>();
 		
-		// API URL 호출 및 JSON결과 HashMap 리턴
+		// API URL �샇異� 諛� JSON寃곌낵 HashMap 由ы꽩
 		try {
 			returnHashMap = getRecipejsonStream(grid_Crse, start_index, end_index, paramHashMap);
 		} catch (Exception e) {
@@ -114,11 +114,11 @@ public class ConnectRCP {
 		String code = objUtils.toStr(objUtils.toHashMap(returnHashMap, "recipeResultHashMap").get("code"));
 		String message = objUtils.toStr(objUtils.toHashMap(returnHashMap, "recipeResultHashMap").get("message"));
 		
-		if("INFO-000".equals(code) && "정상 처리되었습니다.".equals(message)) {
-			// API URL 호출 결과 리스트 리턴(HashMap)
+		if("INFO-000".equals(code) && "�젙�긽 泥섎━�릺�뿀�뒿�땲�떎.".equals(message)) {
+			// API URL �샇異� 寃곌낵 由ъ뒪�듃 由ы꽩(HashMap)
 			List<HashMap<String, Object>> recipeResultList = getRecipeList(objUtils.toHashMap(returnHashMap, "jsonHashMap"), grid_Crse);
 			try {
-				// HashMap 형식의 List -> VO 형식의 List 변환
+				// HashMap �삎�떇�쓽 List -> VO �삎�떇�쓽 List 蹂��솚
 				crseList = (List<RCP_CrseVO>) this.toVoList(recipeResultList, "Crse");
 			} catch (Exception e) {
 				logger.error("ListMap to ListVO Error:");
@@ -137,17 +137,17 @@ public class ConnectRCP {
 				
 				if("Info".equals(taskGubun)) {
 					RCP_InfoVO rcp_InfoVo = new RCP_InfoVO();
-					// hashMap - > rcp_IrdntVo 변환
+					// hashMap - > rcp_IrdntVo 蹂��솚
 					objUtils.toObject(objUtils.toHashmapLower(hashMap), rcp_InfoVo);
 					returnList.add(rcp_InfoVo);
 				} else if("Irdnt".equals(taskGubun)) {
 					RCP_IrdntVO rcp_IrdntVo = new RCP_IrdntVO();
-					// hashMap - > rcp_IrdntVo 변환
+					// hashMap - > rcp_IrdntVo 蹂��솚
 					objUtils.toObject(objUtils.toHashmapLower(hashMap), rcp_IrdntVo);
 					returnList.add(rcp_IrdntVo);
 				} else if("Crse".equals(taskGubun)) {
 					RCP_CrseVO rcp_CrseVo = new RCP_CrseVO();
-					// hashMap - > rcp_IrdntVo 변환
+					// hashMap - > rcp_IrdntVo 蹂��솚
 					objUtils.toObject(objUtils.toHashmapLower(hashMap), rcp_CrseVo);
 					returnList.add(rcp_CrseVo);
 				}
@@ -163,16 +163,16 @@ public class ConnectRCP {
 	public HashMap<String, Object> getRecipejsonStream(String gridStr, int start_index, int end_index, HashMap<String, Object> paramHashMap) {
 		HashMap<String, Object> returnHashMap = new HashMap<String, Object>();
 		
-		// start_index 가 0일경우 기본값 0
+		// start_index 媛� 0�씪寃쎌슦 湲곕낯媛� 0
 		start_index = (0 == objUtils.toInt(start_index)) ? 1 : start_index;
 		
-		// end_index 가 0이거나 999보다 클 경우 기본값 5
+		// end_index 媛� 0�씠嫄곕굹 999蹂대떎 �겢 寃쎌슦 湲곕낯媛� 5
 		end_index = (0 == objUtils.toInt(end_index) || 999 < end_index) ? 5 : end_index;
 		
-		// 더미용 파라미터
+		// �뜑誘몄슜 �뙆�씪誘명꽣
 		String parameter = "?dumyParam=";
 		try {
-			// HashMap의 각 키, 값 변수에 추가
+			// HashMap�쓽 媛� �궎, 媛� 蹂��닔�뿉 異붽�
 			if(!paramHashMap.isEmpty()) {
 				for (String mapkey : paramHashMap.keySet()) {
 					if(!"".equals("" + paramHashMap.get(mapkey)) && null != paramHashMap.get(mapkey)) {
@@ -185,25 +185,25 @@ public class ConnectRCP {
 			new CatchUtils(e);
 		}
 		
-		// API 호출용 URL Path 생성
+		// API �샇異쒖슜 URL Path �깮�꽦
 		String path = "/" + api_key + "/" + type + "/" + gridStr + "/" + start_index + "/" + end_index + "";
 		
-		// API URL 호출
+		// API URL �샇異�
 		String jsonStream = HttpClientUtil.get(url + path + parameter);
 		logger.info("Call URL:");
 		logger.info(url + path + parameter);
 		
-		// JsonStream -> HashMap 변환
+		// JsonStream -> HashMap 蹂��솚
 		HashMap<String, Object> jsonHashMap = objUtils.JsonToHashMap(jsonStream);
 		returnHashMap.put("jsonHashMap", jsonHashMap);
 		
 		System.out.println("jsonHashMap: " + jsonHashMap.toString());
 		
-		// API URL 호출 결과 사이즈
+		// API URL �샇異� 寃곌낵 �궗�씠利�
 		int totalCnt = getRecipeTotalCnt(jsonHashMap, gridStr);
 		returnHashMap.put("totalCnt", totalCnt);
 		
-		// API URL 호출 결과 상태 리턴
+		// API URL �샇異� 寃곌낵 �긽�깭 由ы꽩
 		HashMap<String, Object> recipeResultHashMap = getRecipeResult(jsonHashMap, gridStr);
 		returnHashMap.put("recipeResultHashMap", recipeResultHashMap);
 
@@ -212,7 +212,7 @@ public class ConnectRCP {
 	}
 	
 	public int getRecipeTotalCnt(HashMap<String, Object> jsonHashMap, String grid) {
-		// 호출 결과 사이즈 Map 분리
+		// �샇異� 寃곌낵 �궗�씠利� Map 遺꾨━
 		HashMap<String, Object> getData = new HashMap<String, Object>();
 		try {
 			getData = objUtils.toHashMap(jsonHashMap, grid);
@@ -225,7 +225,7 @@ public class ConnectRCP {
 	
 	public HashMap<String, Object> getRecipeResult(HashMap<String, Object> jsonHashMap, String grid){
 		HashMap<String, Object> returnHashMap = new HashMap<String, Object>();
-		// 호출 결과 상태 Map 분리
+		// �샇異� 寃곌낵 �긽�깭 Map 遺꾨━
 		HashMap<String, Object> getData = new HashMap<String, Object>();
 		try {
 			getData = objUtils.toHashMap(jsonHashMap, grid);
@@ -247,14 +247,14 @@ public class ConnectRCP {
 		returnHashMap.put("code", code);
 		returnHashMap.put("message", message);
 		
-		logger.info("API URL 호출 결과 ->");
+		logger.info("API URL �샇異� 寃곌낵 ->");
 		logger.info("code: " + code + ", message: " + message);
 		
 		return returnHashMap;
 	}
 	
 	public List<HashMap<String, Object>> getRecipeList(HashMap<String, Object> jsonHashMap, String grid){
-		// 호출 결과 상태 Map 분리
+		// �샇異� 寃곌낵 �긽�깭 Map 遺꾨━
 		HashMap<String, Object> getData = new HashMap<String, Object>();
 		try {
 			getData = objUtils.toHashMap(jsonHashMap, grid);
