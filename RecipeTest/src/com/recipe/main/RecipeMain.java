@@ -1,5 +1,9 @@
 package com.recipe.main;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,11 +12,13 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.recipe.common.ConnectionOra;
 import com.recipe.common.ObjectUtils;
 import com.recipe.jsonStream.ConnectRCP;
 import com.recipe.vo.RCP_CrseVO;
 import com.recipe.vo.RCP_InfoVO;
 import com.recipe.vo.RCP_IrdntVO;
+import com.recipe.vo.Recipe_InfoVO;
 
 public class RecipeMain {
 	
@@ -25,6 +31,79 @@ public class RecipeMain {
 	
 	public static void main(String[] args) {
 		
+		Connection conn = null; // DB연결된 상태(세션)을 담은 객체
+        PreparedStatement pstm = null;  // SQL 문을 나타내는 객체
+        ResultSet rs = null;  // 쿼리문을 날린것에 대한 반환값을 담을 객체
+        
+        // SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
+        // 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
+        
+        List<Recipe_InfoVO> recipe_InfoList = new ArrayList<Recipe_InfoVO>();
+        Recipe_InfoVO recipe_InfoVo = new Recipe_InfoVO();
+        
+        try {
+        	String quary = "SELECT * FROM RECIPE_INFO";
+        	
+        	conn = ConnectionOra.getConnection();
+        	pstm = conn.prepareStatement(quary);
+        	rs = pstm.executeQuery();
+        	
+        	System.out.println("결과 출력시작");
+			while(rs.next()){
+				//숫자 대신 컬럼 이름을 적어도 된다.
+//				int recipe_code = rs.getInt(1);
+//				String recipe_name = rs.getString(2);
+//				String recipe_summ = rs.getString(3);
+//				int recipe_price = rs.getInt(4);
+//				String recipe_process = rs.getString(6);
+//				String recipe_status = rs.getString(7);
+//				String rd_id = rs.getString(8);
+//				java.sql.Date hiredate = rs.getDate(5); // Date 타입 처리
+				
+//				String result = recipe_code+" "+recipe_name+" "+recipe_summ+" "+recipe_price+" "+recipe_process+" "+recipe_status+" "+rd_id;
+//				System.out.println(result);
+				
+				recipe_InfoVo = new Recipe_InfoVO();
+				recipe_InfoVo.setRecipe_code(rs.getInt(1));
+				recipe_InfoVo.setRecipe_name(rs.getString(2));
+				recipe_InfoVo.setRecipe_summ(rs.getString(3));
+				recipe_InfoVo.setRecipe_price(rs.getInt(4));
+				recipe_InfoVo.setRecipe_process(rs.getString(5));
+				recipe_InfoVo.setRecipe_status(rs.getString(6));
+				recipe_InfoVo.setRd_id(rs.getString(7));
+				
+				// 위 아래 같은 역할이며 위에처럼해도 되고 아래처럼 해도 된다.
+				recipe_InfoVo = new Recipe_InfoVO();
+				recipe_InfoVo.setRecipe_code(rs.getInt("RECIPE_CODE"));
+				recipe_InfoVo.setRecipe_name(rs.getString("RECIPE_NAME"));
+				recipe_InfoVo.setRecipe_summ(rs.getString("RECIPE_SUMM"));
+				recipe_InfoVo.setRecipe_price(rs.getInt("RECIPE_PRICE"));
+				recipe_InfoVo.setRecipe_process(rs.getString("RECIPE_PROCESS"));
+				recipe_InfoVo.setRecipe_status(rs.getString("RECIPE_STATUS"));
+				recipe_InfoVo.setRd_id(rs.getString("RD_ID"));
+				
+				recipe_InfoList.add(recipe_InfoVo);
+			}
+			
+			for (Recipe_InfoVO recipe_InfoVO2 : recipe_InfoList) {
+				System.out.println("recipe_InfoVO2: " + recipe_InfoVO2.toString());
+			}
+
+		} catch (SQLException sqle) {
+            System.out.println("SELECT문에서 예외 발생");
+            sqle.printStackTrace();
+		}finally{
+            // DB 연결을 종료한다.
+            try{
+                if ( rs != null ){rs.close();}   
+                if ( pstm != null ){pstm.close();}   
+                if ( conn != null ){conn.close(); }
+            }catch(Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+            
+        }
+
 		String task = "1";
 		sc = new Scanner(System.in);
 //		try {
@@ -39,12 +118,13 @@ public class RecipeMain {
 		task = objUtils.toStr(task).replace(".", "").replace("명", "").trim();
 		
 		if("1".equals(task) || "재료".equals(task)) {
-			new RecipeMain().taskIrdnt();
+//			new RecipeMcain().taskIrdnt();
 		} else if ("2".equals(task) || "레시피".equals(task)) {
-			new RecipeMain().taskCrse();
+//			new RecipeMain().taskCrse();
 		} else {
 //			new RecipeMain().taskInfo();
 		}
+		
 		
 	}
 	
